@@ -94,26 +94,9 @@ const Left = () => (
           value="Sign In"
         />
       </form>
-      <div className="links">
-        <Link to="/">Forgot Password</Link>
-      </div>
-      <div className="or">
-        <div className="bar" />
-        <span>OR</span>
-        <div className="bar" />
-      </div>
-      <input
-        type="submit"
-        id="signUp"
-        className="secondary-btn"
-        value="Sign Up"
-      />
+      
       <footer id="main-footer">
         <p>Banka&copy; 2019</p>
-        <div>
-          <Link to="/">terms of use</Link> | <Link to="/">Privacy</Link> |
-          <Link to="/adminLogin">admin</Link>
-        </div>
       </footer>
     </div>
   </div>

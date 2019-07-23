@@ -10,9 +10,10 @@ const App = () => {
     <>
       <Switch>
         <Route exact path="/" component={Index} />
-        <Route exact path="/adminLogin" component={AdminLogin} />
+        <Route path="/adminLogin" component={AdminLogin} />
       </Switch>
     </>
   );
 };
+
 export default App;
