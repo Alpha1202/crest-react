@@ -65,7 +65,7 @@ const Left = () => (
           <img src={image} alt="logo" />
         </Link>
       </div>
-      <form id="loginUser">
+      <form id="signUpUser">
         <div>
           <label htmlFor="email">Email</label>
           <input
@@ -95,19 +95,8 @@ const Left = () => (
         />
       </form>
       <div className="links">
-        <Link to="/">Forgot Password</Link>
+        <Link to="/">Already registered?</Link>
       </div>
-      <div className="or">
-        <div className="bar" />
-        <span>OR</span>
-        <div className="bar" />
-      </div>
-      <Link to="/signup" className="secondary-btn">Sign Up</Link>
-        {/* type="submit"
-        id="signUp"
-        className="secondary-btn"
-        value="Sign Up" */}
-      {/* /> */}
       <footer id="main-footer">
         <p>Banka&copy; 2019</p>
         <div>
@@ -119,7 +108,7 @@ const Left = () => (
   </div>
 );
 
-class Index extends Component {
+class signUp extends Component {
   constructor(props) {
     super(props);
     this.state = {};
@@ -135,4 +124,4 @@ class Index extends Component {
   }
 }
 
-export default Index;
+export default signUp;
