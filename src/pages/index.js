@@ -1,8 +1,12 @@
 import React, { Component } from "react";
+import { connect } from 'react-redux';
 import { Link } from "react-router-dom";
 import "../styles/homepage.css";
-import image from '../images/logo.png';
-import Carousel from '../components/carousel.js'
+import Carousel from '../components/carousel.js';
+import ImageLink from '../components/shared/Links/imageLinks';
+import Login from '../components/Registration/Login';
+
+
 
 const Right = (props) => (
   <div id="right">
@@ -45,12 +49,12 @@ const Right = (props) => (
           <h3>
             <b>Welcome To Banka</b>
           </h3>
-          <a href="./signup.html" id="signUp-small" className="primary-btn">
+          <Link to="/signUp" id="signUp-small" className="primary-btn">
             Sign Up
-          </a>
-          <a href="./login.html" id="login" className="primary-btn">
+          </Link>
+          <Link to="/login" id="login" className="primary-btn">
             login
-          </a>
+          </Link>
         </div>
       </div>
     </div>
@@ -60,61 +64,8 @@ const Right = (props) => (
 const Left = () => (
   <div id="left" className="left-signin">
     <div id="signin">
-      <div className="logo">
-        <Link to="/">
-          <img src={image} alt="logo" />
-        </Link>
-      </div>
-      <form id="loginUser">
-        <div>
-          <label htmlFor="email">Email</label>
-          <input
-            type="text"
-            className="text-input"
-            id="email"
-            name="email"
-            required
-          />
-        </div>
-        <span id="errorHandler" />
-        <br />
-        <div>
-          <label htmlFor="password">Password</label>
-          <input
-            type="password"
-            className="text-input"
-            id="password"
-            required
-          />
-        </div>
-        <input
-          type="submit"
-          id="signin"
-          className="primary-btn"
-          value="Sign In"
-        />
-      </form>
-      <div className="links">
-        <Link to="/">Forgot Password</Link>
-      </div>
-      <div className="or">
-        <div className="bar" />
-        <span>OR</span>
-        <div className="bar" />
-      </div>
-      <Link to="/signup" className="secondary-btn">Sign Up</Link>
-        {/* type="submit"
-        id="signUp"
-        className="secondary-btn"
-        value="Sign Up" */}
-      {/* /> */}
-      <footer id="main-footer">
-        <p>Banka&copy; 2019</p>
-        <div>
-          <Link to="/">terms of use</Link> | <Link to="/">Privacy</Link> |
-          <Link to="/adminLogin">admin</Link>
-        </div>
-      </footer>
+      <ImageLink />
+      <Login />
     </div>
   </div>
 );
@@ -135,4 +86,8 @@ class Index extends Component {
   }
 }
 
-export default Index;
+const mapStatetoProps = state => ({
+  test: state.auth,
+});
+
+export default connect(mapStatetoProps)(Index);
