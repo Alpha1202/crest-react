@@ -7,10 +7,12 @@ class Carousel extends Component {
     let timer = setInterval(() => {
       let i;
       let x = document.getElementsByClassName("slide");
+
       for (i = 0; i < x.length; i++) {
         x[i].style.display = "none";
       }
       index++;
+
       if (index > x.length) {
         index = 1;
       }
@@ -25,6 +27,7 @@ componentDidMount() {
 
   render() {
     const { children } = this.props;
+
     return <div>{children}</div>;
   }
 }
