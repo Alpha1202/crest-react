@@ -9,9 +9,9 @@ const initialState = {
     switch (action.type) {
       case actionTypes.BEGIN_LOADING:
         return { ...state, loading: true };
-      case actionTypes.FETCH_TRANSACTION_SUCCESS:
+      case actionTypes.FETCH_TRANSACTION_DETAILS_SUCCESS:
         return { ...state, transactionList: action.transactions, loading: false };
-      case actionTypes.FETCH_TRANSACTION_FAILURE:
+      case actionTypes.FETCH_TRANSACTION_DETAILS_FAILURE:
         return { ...state, loading: false };
       default:
         return state;

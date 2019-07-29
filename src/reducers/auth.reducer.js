@@ -5,6 +5,7 @@ const initialState = {
     staff: false,
     redirect: false,
     token: null,
+    email: null
   };
   
   const auth = (state = initialState, action) => {
@@ -24,7 +25,7 @@ const initialState = {
           ...state,
           staff: true,
           redirect: true,
-          token: action.token,
+          token: action.token
         };
       case actionTypes.LOGIN_SUCCESS_CLIENT:
         return {
@@ -32,6 +33,7 @@ const initialState = {
           client: true,
           redirect: true,
           token: action.token,
+          email: action.email
         };
       case actionTypes.SIGNUP_SUCCESS_CLIENT:
         return {

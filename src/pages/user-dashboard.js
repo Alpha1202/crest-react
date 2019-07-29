@@ -1,9 +1,18 @@
 import React, { Component } from "react";
 import { Link } from "react-router-dom";
+import { connect } from 'react-redux';
 import "../styles/user-dashboard.css";
 import "../styles/table.css";
 import image from "../images/logo.png";
 import Logout from "../components/Registration/Logout";
+import AccountDetails from "../components/Accounts/AccountDetails";
+import account from '../actions/account.action';
+import TransactionDetails from "../components/Transactions/TransactionDetails";
+import transactionAction from "../actions/transaction.account";
+
+
+const { accountDetails } = account;
+const { transactionDetails } = transactionAction;
 
 const Toggle = () => (
   <div className="header" id="dashboard">
@@ -66,79 +75,9 @@ const SideNavBar = () => (
 );
 
 
-const AccountDetails = () => (
-  <section className="boxes boxes-small box-account">
-    <div className="box account">
-      <Link id="account-details">
-        <h1>Account Details:</h1>
-        <span />
-        <div className="table">
-          <div className="table-row" id="accountTable">
-            <div className="table-head">Name :</div>
-            <div className="table-body">Nnamani Nzubechukwu</div>
-          </div>
-          <div className="table-row">
-            <div className="table-head">Account Number :</div>
-            <div className="table-body">NO ACCOUNT YET</div>
-          </div>
-          <div className="table-row">
-            <div className="table-head">Account Balance</div>
-            <div className="table-body">$0.00</div>
-          </div>
-          <div className="table-row">
-            <div className="table-head">Account Type</div>
-            <div className="table-body">N/A</div>
-          </div>
-          <div className="table-row">
-            <div className="table-head">Account Status</div>
-            <div className="table-body">N/A</div>
-          </div>
-        </div>
-      </Link>
-    </div>
-  </section>
-);
-
-const Transactions = () => (
-  <section className="boxes boxes-small">
-    <div className="box">
-      <Link id="transaction">
-        <h1>Last 50 Transactions:</h1>
-        <span />
-        <div className="table">
-          <div className="table-row2">
-            <div className="table-header">Acc Number</div>
-            <div className="table-header">Type </div>
-            <div className="table-header">Old Balance</div>
-            <div className="table-header">New Balance</div>
-            <div className="table-header">Amount</div>
-          </div>
-          <div className="table-row2">
-            <div className="table-content">003294933</div>
-            <div className="table-content">Credit</div>
-            <div className="table-content">$1,000,000</div>
-            <div className="table-content">$ 4,000,000</div>
-            <div className="table-content">$3,000,000</div>
-          </div>
-          <div className="table-row2">
-            <div className="table-content">003294933</div>
-            <div className="table-content">Credit</div>
-            <div className="table-content">$1,000,000</div>
-            <div className="table-content">$ 4,000,000</div>
-            <div className="table-content">$3,000,000</div>
-          </div>
-          <div className="table-row2">
-            <div className="table-content">003294933</div>
-            <div className="table-content">Credit</div>
-            <div className="table-content">$1,000,000</div>
-            <div className="table-content">$ 4,000,000</div>
-            <div className="table-content">$3,000,000</div>
-          </div>
-        </div>
-      </Link>
-    </div>
-  </section>
-);
+// const Transactions = () => (
+  
+// );
 
 const CreateAccountModal = () => (
   <div id="Modal" className="modal">
@@ -170,8 +109,8 @@ const Footer = () => (
 );
 const Right = props => (
   <div className="right">
-    <h3>Account Balance: $1,000,000</h3>
-    <h3>Account Type: Current</h3>
+    <h3>Account Balance: {props.balance}</h3>
+    <h3>Account Type: {props.type}</h3>
     <span />
   </div>
 );
@@ -181,14 +120,28 @@ class UserDashboard extends Component {
     super(props);
     this.state = {};
   }
-
-componentDidMount() {
-  const { bankaUserEmail, bankaUserfirstName, bankaUserlastName, bankaUserToken } = localStorage;
-  const Name = bankaUserfirstName.concat(bankaUserlastName);
-  console.log(Name)  
-}
-  state = {};
+  componentDidMount(){
+   this.props.accountDetails()
+   
+  }
+  getAccountDetails = () => {
+    const { accountnumber} = this.props.account;
+    console.log(accountnumber, '.......')
+  }
+// componentDidMount(){
+//   console.log(this.props)
+//   this.props.transactionDetails()
+// }
   render() {
+    // console.log(this.props, '........')
+  const { balance, accType, accountnumber } = this.props.account
+  console.log(accountnumber, '......')
+  const {bankaUserfirstName, bankaUserlastName} = localStorage;
+  
+  const firstName = JSON.parse(bankaUserfirstName);
+  const lastname = JSON.parse(bankaUserlastName);
+
+  const Name = `${firstName.toUpperCase()} ${lastname.toUpperCase()}`
     return (
       <>
       <CreateAccountModal />
@@ -197,10 +150,14 @@ componentDidMount() {
         <div className="box-wrapper">
           <SideNavBar />
           <div className="showcase" id="main">
-            <Right />
+            <Right 
+            balance={balance || 'NOT AVAILABLE'}
+            type={accType || 'NOT AVAILABLE'}/>
             <div className="div-box">
-              <AccountDetails />
-              <Transactions />
+              <AccountDetails 
+              name={Name} 
+              />
+              <TransactionDetails acc={accountnumber} />
             </div>
           </div>
         </div>
@@ -210,5 +167,10 @@ componentDidMount() {
     );
   }
 }
+const mapStatetoProps = state => ({
+  account: state.accounts,
+  transaction: state.transactions
+});
 
-export default UserDashboard;
+export default connect(mapStatetoProps, {accountDetails, transactionDetails})(UserDashboard);
+

@@ -6,8 +6,8 @@ import transactions from './transaction.reducer';
 
 const reducers = combineReducers({
   auth,
- accounts,
- transactions,
+  accounts,
+  transactions,
   isLoadingReducer,
 });
 

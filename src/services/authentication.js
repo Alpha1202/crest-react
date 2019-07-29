@@ -36,11 +36,8 @@ const signUp = (type = 'signup', userData) => {
       .catch(err => err);
   };
 
-  const logOut = type => {
-    localStorage.removeItem('bankaUserEmail');
-    localStorage.removeItem('bankaUserfirstName');
-    localStorage.removeItem('bankaUserlastName');
-    localStorage.removeItem('bankaUserToken');
+  const logOut = () => {
+    localStorage.clear()
     window.location = '/';
   };
   
