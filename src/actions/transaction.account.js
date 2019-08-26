@@ -1,25 +1,24 @@
 import { notify } from 'react-notify-toast';
-import actions from '../constants/actionTypes';
+import { 
+    FETCH_TRANSACTION_DETAILS_SUCCESS,
+    FETCH_TRANSACTION_DETAILS_FAILURE
+} from './types';
 import getTransactionDetails from '../services/transaction';
-import errorHandler from '../helpers/errorHandler';
-import contentLoading from './loading.action';
 
-// const { getTransactionDetails } = transactionServices;
 
-const getTransactionDetailsSuccesful = () => {
+export const getTransactionDetailsSuccesful = () => {
     return {
-        type: actions.FETCH_TRANSACTION_DETAILS_SUCCESS,
+        type: FETCH_TRANSACTION_DETAILS_SUCCESS,
     };
 };
-const getTransactionDetailsFailure = () => {
+export const getTransactionDetailsFailure = () => {
     return {
-        type: actions.FETCH_TRANSACTION_DETAILS_FAILURE,
+        type: FETCH_TRANSACTION_DETAILS_FAILURE,
     };
 };
 
-const transactionDetails = (accountnumber) => {
+export const transactionDetails = (accountnumber) => {
     return dispatch => {
-        dispatch(contentLoading());
         return getTransactionDetails('transactions', accountnumber).then(res => {
             if(res.status >= 400) {
                 dispatch(getTransactionDetailsFailure());
@@ -27,25 +26,9 @@ const transactionDetails = (accountnumber) => {
             }
 
             if (res.status === 200) {
-                console.log(res)
                 const { accountnumber, balance,status,type} = res.data[0];
-                // localStorage.accountnumber = accountnumber;
-                // localStorage.balance = balance;
-                // localStorage.status = status;
-                // localStorage.type = type;
                 dispatch(getTransactionDetailsSuccesful());
             }
     })
 }
 }
-
-
-
-
-const transactionAction = {
-    getTransactionDetailsSuccesful,
-    getTransactionDetailsFailure,
-    transactionDetails
-};
-
-export default transactionAction;

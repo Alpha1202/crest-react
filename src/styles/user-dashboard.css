@@ -14,7 +14,7 @@ html {
 body {
   background: #ccc;
   margin: 0;
-  /* overflow-x: hidden; */
+ 
 }
 html,
 body,
@@ -110,7 +110,7 @@ color: var(--dark);
 .div-box {
   display: flex;
   flex-direction: column;
-  width: 80%;
+  width: 100%;
   margin: 0 auto;
   padding: 1rem 2rem;
 }

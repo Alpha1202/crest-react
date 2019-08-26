@@ -2,13 +2,11 @@ import React, { Component } from "react";
 import { Link, Redirect } from "react-router-dom";
 import { connect } from 'react-redux';
 import Input from "./../Input";
-import Button from "../shared/Buttons/Button";
 import "../../styles/homepage.css";
-import auth from '../../actions/auth.actions';
+import{ login } from '../../actions/auth.actions';
 
-const { login } = auth;
 
-class Login extends Component {
+export class Login extends Component {
   constructor(props) {
     super(props);
     this.state = {

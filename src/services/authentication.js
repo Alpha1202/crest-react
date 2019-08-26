@@ -35,6 +35,23 @@ const signUp = (type = 'signup', userData) => {
       .then(resp => resp)
       .catch(err => err);
   };
+const adminSignIn = (type='signin', userData) => {
+
+    const config = {
+        method: 'POST',
+        headers: {
+          Accept: 'application/json',
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify(userData),
+      };
+
+      return window
+      .fetch(`${defaultUrl}/users/${type}`, config)
+      .then(resp => resp.json())
+      .then(resp => resp)
+      .catch(err => err);
+  };
 
   const logOut = () => {
     localStorage.clear()
@@ -45,4 +62,5 @@ const signUp = (type = 'signup', userData) => {
     signIn,
     signUp,
     logOut,
+    adminSignIn
   };

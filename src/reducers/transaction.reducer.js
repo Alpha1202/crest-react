@@ -1,4 +1,8 @@
-import actionTypes from '../constants/actionTypes';
+import {
+  BEGIN_LOADING,
+  FETCH_TRANSACTION_DETAILS_SUCCESS,
+  FETCH_TRANSACTION_DETAILS_FAILURE,
+} from '../actions/types';
 
 const initialState = {
     loading: false,
@@ -7,11 +11,11 @@ const initialState = {
 
   const transactions = (state = initialState, action) => {
     switch (action.type) {
-      case actionTypes.BEGIN_LOADING:
+      case BEGIN_LOADING:
         return { ...state, loading: true };
-      case actionTypes.FETCH_TRANSACTION_DETAILS_SUCCESS:
+      case FETCH_TRANSACTION_DETAILS_SUCCESS:
         return { ...state, transactionList: action.transactions, loading: false };
-      case actionTypes.FETCH_TRANSACTION_DETAILS_FAILURE:
+      case FETCH_TRANSACTION_DETAILS_FAILURE:
         return { ...state, loading: false };
       default:
         return state;
