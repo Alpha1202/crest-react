@@ -3,11 +3,10 @@ import { Link, Redirect } from "react-router-dom";
 import { connect } from "react-redux";
 import "../../styles/user-dashboard.css";
 import "../../styles/table.css";
-import accountAction from "../../actions/account.action";
+import { accountDetails } from "../../actions/account.action";
 
-const { accountDetails } = accountAction;
 
-class AccountDetails extends Component {
+export class AccountDetails extends Component {
   constructor(props) {
     super(props);
   }
@@ -17,7 +16,7 @@ class AccountDetails extends Component {
     const { accountDetails } = this.props;
     accountDetails();
   };
-  componentWillMount() {
+  componentDidMount() {
     this.getAccountDetails();
   }
   render() {

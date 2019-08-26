@@ -20,7 +20,6 @@ body {
   font-weight: 300;
   background: #181818;
   color: #ffffff;
-  overflow: hidden;
 }
 h1,
 h2,
@@ -94,7 +93,7 @@ h6 {
 #signin .secondary-btn,
 .or,
 .links {
-  width: 60%;
+  width: 100%;
 }
 #signin .links a {
   display: block;
@@ -163,8 +162,9 @@ h4{
   color: #ccc;
   text-align: center;
   font-size: 0.8rem;
-  max-width: 80%;
+  max-width: 100%;
   padding-top: 5rem;
+  display: contents;
 }
 #main-footer a {
   color: #555555;

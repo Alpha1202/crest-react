@@ -1,7 +1,7 @@
 import { defaultUrl } from  '../config/config.json';
-import accountAction from "../actions/account.action";
+import { accountDetails } from "../actions/account.action";
 import { connect } from 'react-redux';
-const { accountDetails } = accountAction;
+
 
 const { bankaUserToken } = localStorage;
 
@@ -12,8 +12,6 @@ const userAccountConfig= {
 };
 
 const getTransactionDetails = (type = 'transactions', accountnumber) => {
-    // console.log(this.props.accounts)
-    // const { accountnumber} = this.props.accounts
     const acc = 1564290631698
     return window
     .fetch(`${defaultUrl}/accounts/${accountnumber}/transactions`, userAccountConfig)
@@ -23,11 +21,3 @@ const getTransactionDetails = (type = 'transactions', accountnumber) => {
 }
 
 export default getTransactionDetails;
-// const mapStatetoProps = state => ({
-//     accounts: state.accounts,
-//   });
-  
-//   export default connect(
-//     mapStatetoProps,
-//     // { accountDetails}
-//   )(getTransactionDetails);

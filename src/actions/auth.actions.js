@@ -1,47 +1,52 @@
 import { notify } from 'react-notify-toast';
-import actions from '../constants/actionTypes';
+import {
+  LOGIN_SUCCESS_STAFF,
+  LOGIN_SUCCESS_CLIENT,
+  LOGIN_FAILURE,
+  LOGOUT,
+  SIGNUP_SUCCESS_CLIENT,
+ } from './types';
+
 import authenticationServices from '../services/authentication';
-import errorHandler from '../helpers/errorHandler';
-import contentLoading from './loading.action';
 
-const { signIn, signUp, logOut } = authenticationServices ;
 
-const loginSuccessStaff = token => {
+const { signIn, signUp, adminSignIn, logOut } = authenticationServices ;
+
+export const loginSuccessStaff = token => {
     return {
-      type: actions.LOGIN_SUCCESS_STAFF,
+      type: LOGIN_SUCCESS_STAFF,
       token,
     };
   };
 
-  const loginSuccessClient = token => {
+ export const loginSuccessClient = token => {
     return {
-      type: actions.LOGIN_SUCCESS_CLIENT,
+      type: LOGIN_SUCCESS_CLIENT,
       token,
     };
   };
 
-  const loginFailure = () => {
+ export const loginFailure = () => {
     return {
-      type: actions.LOGIN_FAILURE,
+      type: LOGIN_FAILURE,
     };
   };
 
-  const logoutSuccessful = () => {
+ export const logoutSuccessful = () => {
     return {
-      type: actions.LOGOUT,
+      type: LOGOUT,
     };
   };
 
-  const signupSuccessClient = token => {
+ export const signupSuccessClient = token => {
     return {
-      type: actions.SIGNUP_SUCCESS_CLIENT,
+      type: SIGNUP_SUCCESS_CLIENT,
       token,
     };
   };
 
-  const login = userDetails => {
+ export const login = userDetails => {
     return dispatch => {
-      dispatch(contentLoading());
       return signIn('signin', userDetails).then(res => {
         if (res.status >= 400) {
           dispatch(loginFailure());
@@ -59,9 +64,8 @@ const loginSuccessStaff = token => {
     })
 }
 };
-  const signup = userDetails => {
+export const signup = userDetails => {
     return dispatch => {
-      dispatch(contentLoading());
       return signUp('signup', userDetails).then(res => {
         if (res.status >= 400) {
           dispatch(loginFailure());
@@ -79,25 +83,32 @@ const loginSuccessStaff = token => {
     })
 }
 };
-  const logout = () => {
+export const adminLogin = userDetails => {
     return dispatch => {
-      dispatch(contentLoading());
+      return adminSignIn('signin', userDetails).then(res => {
+        if (res.status >= 400) {
+          dispatch(loginFailure());
+          notify.show(errorHandler(res.error), 'error');
+        }
+
+        if (res.status === 200) {
+          const { email, firstName, lastName, token } = res.data;
+          localStorage.bankaStaffEmail = email;
+          localStorage.bankaStafffirstName = JSON.stringify(firstName);
+          localStorage.bankaStafflastName = JSON.stringify(lastName);
+          localStorage.bankaStaffToken = `bearer ${token}`;
+          dispatch(loginSuccessStaff(token));
+          }
+    })
+}
+};
+export  const logout = () => {
+    return dispatch => {
       return (
         logOut('logout')
     )
 }
   }
 
-const authAction = {
-    login,
-    signup,
-    logout,
-    logoutSuccessful,
-    loginSuccessStaff,
-    loginSuccessClient,
-    loginFailure,
-    signupSuccessClient
-  };
-  
-  export default authAction;
+
   

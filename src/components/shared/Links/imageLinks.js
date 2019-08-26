@@ -1,6 +1,5 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
-import PropTypes from 'prop-types';
 import image from '../../../images/logo.png';
 import "../../../styles/homepage.css";
 

@@ -3,28 +3,19 @@ import { Link, Redirect } from "react-router-dom";
 import { connect } from "react-redux";
 import "../../styles/user-dashboard.css";
 import "../../styles/table.css";
-import transactionAction from "../../actions/transaction.account";
+import { transactionDetails } from "../../actions/transaction.account";
 
-import accountAction from "../../actions/account.action";
+import { accountDetails }from "../../actions/account.action";
 
-const { accountDetails } = accountAction;
-const { transactionDetails } = transactionAction;
 
-class TransactionDetails extends Component {
+export class TransactionDetails extends Component {
     constructor(props) {
         super(props);
       }
-    // getTransactionDetails = () => {
-    //     const { transactionDetails } = this.props;
-    //     console.log(transactionDetails())
-    //     return transactionDetails();
-    // };
+   
     componentDidMount() {
     const { transactionDetails, account, acc } = this.props;
-        // if (account.accountnumber) {
-        //   const res = await transactionDetails(account.accountnumber);
-        //   console.log(res, '>>>>>>>>>>>>>>>>>>')
-        // }
+      
       }
     render() { 
      
@@ -74,7 +65,7 @@ class TransactionDetails extends Component {
          );
     }
 };
-// export default TransactionDetails;
+
 const mapStatetoProps = state => {
   return {
     account: state.accounts,

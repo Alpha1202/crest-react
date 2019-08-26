@@ -4,11 +4,10 @@ import { connect } from 'react-redux';
 import Input from "./../Input";
 import Button from "../shared/Buttons/Button";
 import "../../styles/homepage.css";
-import auth from '../../actions/auth.actions';
+import { signup } from '../../actions/auth.actions';
 
-const { signup } = auth;
 
-class Signup extends Component {
+export class Signup extends Component {
   constructor(props) {
     super(props);
     this.state = {
