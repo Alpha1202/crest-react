@@ -23,7 +23,7 @@
   },
   "homepage": "https://github.com/Alpha1202/crest-react#readme",
   "dependencies": {
-    "axios": "^0.19.0",
+    "axios": "^0.21.1",
     "enzyme": "^3.10.0",
     "enzyme-adapter-react-16": "^1.14.0",
     "expect": "^24.8.0",
